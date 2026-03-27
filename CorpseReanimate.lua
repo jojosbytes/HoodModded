@@ -52,6 +52,17 @@ end
 ---------------------------------------------------------------------
 -- MAIN ANIMATION FUNCTION
 ---------------------------------------------------------------------
+
+if not game.ReplicatedStorage:FindFirstChild("_Assets") then
+	local AssetFolder = Instance.new("Folder")
+	AssetFolder.Name = "_Assets"
+	AssetFolder.Parent = game.ReplicatedStorage
+	
+	local PlaceHolder = game:GetObjects('rbxassetid://123624002404494')[1]
+	PlaceHolder.Parent = AssetFolder
+	PlaceHolder.Name = "PlaceHolder"
+end
+
 local AssetFolder = game.ReplicatedStorage["_Assets"]
 
 module.Animate = function(DataTable)
@@ -166,6 +177,7 @@ module.Animate = function(DataTable)
 		Stop = function()
 			AnimationTrack:Stop(Information.FadeOut)
 			connection:Disconnect()
+			AnimationRigFake:Destroy()
 		end,
 	}
 end
